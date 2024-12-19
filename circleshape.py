@@ -11,7 +11,12 @@ class CircleShape(pg.sprite.Sprite):
         self.velocity = pg.Vector2(0, 0)
         self.radius = radius
     
-    def draw(selc, screen):
+    def collision(self, CircleShape):
+        distance = self.position.distance_to(CircleShape.position)
+        return distance <= (self.radius + CircleShape.radius)
+    
+    def draw(self, screen):
         pass
     def update(self, dt):
         pass
+    
