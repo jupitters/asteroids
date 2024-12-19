@@ -7,6 +7,11 @@ def main():
     screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pg.time.Clock()
     dt = 0
+
+    updatable = pg.sprite.Group()
+    drawable = pg.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     running = True
@@ -17,8 +22,13 @@ def main():
 
         screen.fill((0,0,0))
         dt = clock.tick(FPS) / 1000
-        player.update(dt)
-        player.draw(screen)
+
+        for objects in updatable:
+            objects.update(dt)
+            
+        for objects in drawable:
+            objects.draw(screen)
+
         pg.display.flip()
 
         pg.display.set_caption(f"{clock.get_fps(): .1f}")
