@@ -16,10 +16,11 @@ def main():
                 running = False
 
         screen.fill((0,0,0))
+        dt = clock.tick(FPS) / 1000
+        player.update(dt)
         player.draw(screen)
         pg.display.flip()
 
-        dt = clock.tick(FPS) / 1000
         pg.display.set_caption(f"{clock.get_fps(): .1f}")
     
 

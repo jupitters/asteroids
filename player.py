@@ -18,3 +18,22 @@ class Player(CircleShape):
     def draw(self, screen):
         points = self.triangle()
         pg.draw.polygon(screen, (255,255,255), points, 2)
+
+    def rotate(self, dt):
+        self.rotation += PLAYER_TURN_SPEED * dt
+
+    def move(self, dt):
+        forward = pg.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * dt 
+
+    def update(self, dt):
+        keys = pg.key.get_pressed()
+
+        if keys[pg.K_a]:
+            self.rotate(-dt)
+        if keys[pg.K_d]:
+            self.rotate(dt)
+        if keys[pg.K_w]:
+            self.move(dt)
+        if keys[pg.K_s]:
+            self.move(-dt)
